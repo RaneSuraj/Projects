@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  #All the services need to list here one by one
+  #1. Database Service
+  db:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: microapp_db
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U admin  -d microapp_db"]
+      interval: 5s      # wait 10s between checks
+      timeout: 5s       # if command fails longer than 5s, it fails
+      retries: 5        # declare fail container if container fails 5 times consecutively
+      start_period: 10s # this gived db 10s to boot before starting checks
+
+  # 2. Backend Service
+  backend:
+    build: ./backend/.
+    container_name: app-backend
+    environment:
+      DATABASE_URL: postgresql://admin:password123@db:5432/microapp_db
+    ports:
+      - "5001:5001"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # 3. Frontend Service
+  frontend:
+    build: ./frontend/.
+    container_name: app-frontend
+    environment:
+      BACKEND_URL: http://backend:5001
+    ports:
+      - "5000:5000"
+    depends_on:
+      - backend
+
+
