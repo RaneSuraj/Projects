@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Microservices</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; background: #f4f4f9; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        input[type="text"] { width: 70%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #218838; }
+        ul { list-style-type: none; padding: 0; }
+        li { background: #e9ecef; margin: 10px 0; padding: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Message Board</h2>
+        <form method="POST">
+            <input type="text" name="content" placeholder="Enter a new message..." required>
+            <button type="submit">Submit</button>
+        </form>
+        
+        <h3>Recent Messages:</h3>
+        <ul>
+            {% for msg in messages %}
+                <li>{{ msg.content }}</li>
+            {% else %}
+                <li>No messages found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
