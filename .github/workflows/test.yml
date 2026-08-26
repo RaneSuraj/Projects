@@ -3,10 +3,10 @@ on:
   workflow_dispatch: 
 jobs:
   say-hello:
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     steps:
       - name: checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
       - name: say hello to everyone
         run: |
           echo "Hello, Suraj Rane!"
