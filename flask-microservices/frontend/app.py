@@ -32,7 +32,6 @@ def index():
 def health_check():
     return "OK", 200
 
-# main code start here
 if __name__ == '__main__':
     # Frontend runs on port 5000
     app.run(host='0.0.0.0', port=5000)
