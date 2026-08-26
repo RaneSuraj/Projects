@@ -1,0 +1,19 @@
+name: Auto-Linter
+on: 
+  push:
+    paths: 
+    - '*.py'
+jobs:
+  code-checking:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code-checkout
+        uses: actions/checkout@v7
+      - name: setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Install Linter
+        run: pip install ruff
+      - name: check files for linting
+        run: ruff check .
