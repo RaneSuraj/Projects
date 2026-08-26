@@ -1,0 +1,11 @@
+name: First GitHub Actions Workflow
+on:
+  workflow_dispatch:
+jobs:
+  stdout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v7
+      - name: run single command
+        run: echo "Hello, Suraj!"
