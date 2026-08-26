@@ -42,7 +42,6 @@ def add_message():
 def health_check():
     return jsonify({'status': 'healthy'}), 200
 
-# Adding comment to check if linter workflow working or not
 if __name__ == '__main__':
     # Backend runs on port 5001
     app.run(host='0.0.0.0', port=5001)
