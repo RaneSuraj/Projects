@@ -1,21 +1,40 @@
+# Name of the workflow which will show in the task
 name: Auto-Linter
+
+# Actions to be trigger when/on the below details {when push is performed on main branch and anything is related .py then this will trigger}
 on: 
   push:
     branches:
       - main
     paths: 
       - '**/*.py'
+
+# Workflow consist of jobs
 jobs:
+
+  # this is name of the job
   code-checking:
+
+    #every job need runner(VM) to run it below are the details for the same
     runs-on: ubuntu-latest
+
+    # below are the steps the job will execute to complete its designated task
     steps:
+
+        # code needs to be checkout to perform this action
       - name: code-checkout
         uses: actions/checkout@v4
+
+        # setting up pythong to use linter
       - name: setup python
         uses: actions/setup-python@v5
         with:
           python-version: '3.14'
+        
+        # Installing ruff using pip
       - name: Install Linter
         run: pip install ruff
+
+        # Running ruff command to check files for linting
       - name: check files for linting
         run: ruff check .
