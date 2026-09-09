@@ -6,8 +6,6 @@ on:
   push:
     branches:
       - main
-    paths: 
-      - '**/*.py'
 
 # Workflow consist of jobs
 jobs:
@@ -29,7 +27,7 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.14'
+          python-version: '3.11'
         
         # Installing ruff using pip
       - name: Install Linter
